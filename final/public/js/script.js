@@ -23,7 +23,35 @@ window.onload = () => {
     exitBtn.addEventListener('click', exit);
 
     socket.on('loadScene', loadScene);
-    socket.on('updateScene', updateScene);
+    setTimeout(Scene.update({
+        "ball1": {
+          "p": {
+            "x": 22.776599124016197,
+            "y": -46.34500507999985,
+            "z": 3.15
+          }
+        },
+        "p1leftFlipper": {
+          "p": {
+            "x": -7.34,
+            "y": -37.5,
+            "z": 1
+          },
+          "a": -0.52
+        },
+        "p1rightFlipper": {
+          "p": {
+            "x": 7.34,
+            "y": -37.5,
+            "z": 1
+          },
+          "a": 0.52
+        },
+        "playerLose": null,
+        "lose": false,
+        "score": 0
+    }), 1000);
+    //socket.on('updateScene', updateScene);
 	socket.on('playerDisconnects', playerDisconnects);
     socket.on('gameOver', gameOver);
 
@@ -165,12 +193,12 @@ function loadScene(data) {
     var gameContainer = document.getElementById('gameContainer')
     document.getElementById('menuContainer').style.display = 'none';
     gameContainer.style.display = 'block';
-    scene = new Scene(socket.id, data.players, gameContainer, data.sceneDef);
-    scene.start()
+    scene = Scene.create(socket.id, data.players, gameContainer, data.sceneDef);
+    Scene.start()
 }
 
 function updateScene(data) {
-    scene.update(data);
+    Scene.update(data);
 }
 
 function playerDisconnects(message) {

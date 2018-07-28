@@ -68,27 +68,53 @@ Scene.prototype.createScore = function(def) {
 }*/
 
 const Scene = (() => {
-	const scene;
-	const player;
-	const renderer;
+	let scene;
+	let player;
+	let renderer;
+	let cameras = {};
 
-	const create = () => {
+	const create = (playerId, players, domElement, def) => {
 		scene = new THREE.Scene();
 
 		player = Object.values(players).find(player => player.id == playerId);
 
 		renderer = new THREE.WebGLRenderer({ antialias: true });
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		domElement.appendChild(this.renderer.domElement);
+		domElement.appendChild(renderer.domElement);
 
 		def.cameras.forEach(camera => createCamera(camera));
-		def.lights.forEach(light => this.createLight(id, def));
-		def.object3D.forEach(object3D => this.createObject3D(id, def));
+		def.lights.forEach(light => createLight(light));
+		def.objects3D.forEach(object3D => createObject3D(object3D));
 
 		createScore(def.score);
 	}
 
+	const start = () => {
+		renderer.render(scene, cameras[player.camera]);
+		requestAnimationFrame(() => start());
+	}
+
+	const update = (data) => {
+		console.log(data);
+		Object.entries(data).forEach(([id, def]) => {
+			const obj = scene.children.find(element => console.log(element.id));
+	
+			//const obj = scene.getObjectById(id);
+
+			//console.log(scene);
+
+			if(obj) {
+				if(def.p) obj.position.set(...Object.values(def.p));
+				if(def.a) obj.rotation.z = def.a;
+			}
+		});
+	
+		const score = document.getElementById('score');
+		score.textContent = data.score;
+	}
+
 	const createCamera = ({
+		id,
 		type = 'PerspectiveCamera',
 		fov = 45,
 		aspect = window.innerWidth / window.innerHeight,
@@ -100,17 +126,19 @@ const Scene = (() => {
 	} = {}) => {
 		const camera = {
 			PerspectiveCamera() { return new THREE.PerspectiveCamera(fov, aspect, near, far); }
-		}[type];
-	
+		}[type]();
+
+		camera.id = id;
 		camera.position.set(...Object.values(position));
 		camera.lookAt(...Object.values(lookAt));
 		camera.rotation.z = rotation;
 	
-		// camera.userData.owner = owner;
-		//this.cameras[id] = camera;
+		//camera.userData.owner = owner;
+		cameras[id] = camera;
 	}
 
 	const createLight = ({
+		id,
 		type = 'AmbientLight',
 		color = 0xffffff,
 		intensity = 1,
@@ -130,8 +158,9 @@ const Scene = (() => {
 			PointLight() { return new THREE.HemisphereLight(color, intensity, distance, decay); },
 			RectAreaLight() { return new THREE.RectAreaLight(color, intensity, width, height); },
 			SpotLight() { return new THREE.SpotLight(color, intensity, distance, angle, penumbra, decay); }
-		}[type];
+		}[type]();
 	
+		light.id = id;
 		light.position.set(...Object.values(position));
 		light.lookAt(...Object.values(lookAt));
 	
@@ -142,7 +171,7 @@ const Scene = (() => {
 		const loader = new THREE.ColladaLoader();
 	
 		const object3D = new THREE.Object3D();
-		object3D.name = id;
+		object3D.id = id;
 	
 		loader.load(dae, model => {
 			object3D.add(model.scene);
@@ -150,7 +179,18 @@ const Scene = (() => {
 		});
 	}
 
+	const createScore = (def) => {
+		const divScore = document.createElement('div');
+		divScore.classList.add('score');
+		divScore.id = "score";
+	
+		const container = document.getElementById('gameContainer');
+		container.insertBefore(divScore, container.lastElementChild);
+	}
+
 	return {
 		create,
+		start,
+		update
 	}
 })();
