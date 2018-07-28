@@ -1,0 +1,39 @@
+{
+    "cameras": {
+        "camera1": {
+            "fov": 30,
+            "position": { "x": 42.5, "y": -180, "z": 180 },
+            "lookAt": { "x": 42.5, "y": 136.68, "z": 0 }
+        },
+        "camera2": {
+            "fov": 30,
+            "position": { "x": 42.5, "y": 453.36, "z": 180 },
+            "rotation": 3.14,
+            "lookAt": { "x": 42.5, "y": 136.68, "z": 0 }
+        }
+    },
+    "lights": {
+        "light1": {
+            "intensity": 0.5
+        },
+        "light2": {
+            "type": "DirectionalLight",
+            "position": { "x": 42.5, "y": -160, "z": 100 },
+            "lookAt": { "x": 42.5, "y": 132, "z": 0 }
+        }
+    },
+    "objects3D": {
+        "ball1": "models/multiplayer/ball.dae",
+        "ball2": "models/multiplayer/ball.dae",
+        "p1LeftFlipper": "models/multiplayer/p1LeftFlipper.dae",
+        "p1RightFlipper": "models/multiplayer/p1rightFlipper.dae",
+        "p2LeftFlipper": "models/multiplayer/p2LeftFlipper.dae",
+        "p2RightFlipper": "models/multiplayer/p2RightFlipper.dae",
+        "stage": "models/multiplayer/stage.dae"
+    },
+    "score": {
+        "type": "singleplayer",
+        "background": "",
+        "color": ""
+    }
+}

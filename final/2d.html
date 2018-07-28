@@ -1,0 +1,32 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../libs/planck-with-testbed.js"></script>
+    <script src="./public/levels/multiplayer/level.js"></script>
+    <script src="Game.js"></script>
+    <script>
+        planck.testbed("Pinball", function(testbed) {
+            var game = new Game(1, level);
+            //console.log(game.world.getBodyList())
+
+            testbed.step = function() {
+                game.update()
+            }
+
+            document.body.addEventListener('keydown', evt => {
+                if(evt.keyCode == 37) game.updateFlipper('p2LeftFlipper', { active: true, side: 'left' });
+                if(evt.keyCode == 39) game.updateFlipper('p2RightFlipper', { active: true, side: 'right' });
+            });
+
+            document.body.addEventListener('keyup', evt => {
+                if(evt.keyCode == 37) game.updateFlipper('p2LeftFlipper', { active: false, side: 'left' });
+                if(evt.keyCode == 39) game.updateFlipper('p2RightFlipper', { active: false, side: 'right' });
+            });
+
+            return game.world;
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
