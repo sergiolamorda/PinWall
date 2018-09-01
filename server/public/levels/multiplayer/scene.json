@@ -1,0 +1,64 @@
+{
+    "cameras": [
+        {
+            "name": "camera1",
+            "fov": 30,
+            "position": { "x": 42.5, "y": -180, "z": 180 },
+            "lookAt": { "x": 42.5, "y": 136.68, "z": 0 }
+        },
+        {
+            "name": "camera2",
+            "fov": 30,
+            "position": { "x": 42.5, "y": 453.36, "z": 180 },
+            "rotation": 3.14,
+            "lookAt": { "x": 42.5, "y": 136.68, "z": 0 }
+        }
+    ],
+    "lights": [
+        {
+            "name": "light1",
+            "intensity": 0.5
+        },
+        {
+            "name": "light2",
+            "type": "DirectionalLight",
+            "position": { "x": 42.5, "y": -160, "z": 100 },
+            "lookAt": { "x": 42.5, "y": 132, "z": 0 }
+        }
+    ],
+    "objects3D": [
+        {
+            "name": "ball1",
+            "dae": "models/multiplayer/ball.dae"
+        },
+        {
+            "name": "ball2",
+            "dae": "models/multiplayer/ball.dae"
+        },
+        {
+            "name": "p1leftFlipper",
+            "dae": "models/multiplayer/p1LeftFlipper.dae"
+        },
+        {
+            "name": "p1rightFlipper",
+            "dae": "models/multiplayer/p1rightFlipper.dae"
+        },
+        {
+            "name": "p2leftFlipper",
+            "dae": "models/multiplayer/p2LeftFlipper.dae"
+        },
+        {
+            "name": "p2rightFlipper",
+            "dae": "models/multiplayer/p2RightFlipper.dae"
+        },
+        {
+            "name": "stage",
+            "dae": "models/multiplayer/stage.dae"
+        }
+    ],
+    "score": {
+        "type": "singleplayer",
+        "background": "",
+        "color": ""
+    }
+}

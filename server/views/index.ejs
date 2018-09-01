@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Pinball</title>
+	<script src="libs/planck.js"></script>
+	<script src="libs/three.min.js"></script>
+	<script src="libs/ColladaLoader.js"></script>
+	<script src="libs/OrbitControls.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/Scene.js"></script>
+    <script src="js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div id="menuContainer" class="container">
+		<img id="logo" src="img/logo.svg"></img>
+		<button id="playSingleplayerBtn" class="menuBtn">Singleplayer</button>
+		<button id="playMultiplayerBtn" class="menuBtn">Multiplayer</button>
+		<button id="showRankingBtn" class="menuBtn">Ranking</button>
+		<button id="logoutBtn" class="menuBtn" onclick="location.href='/logout';">Cerrar session</button>
+	</div>
+	<div id="gameContainer" class="container">
+		<img src="img/back.svg" id="exitBtn" class="arrow"></img>
+	</div>
+	<div id="rankingContainer" class="container">
+		<img id="logo" src="img/logo.svg"></img>
+	</div>
+</body>
+</html>

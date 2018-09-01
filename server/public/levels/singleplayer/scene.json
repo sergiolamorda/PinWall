@@ -1,0 +1,45 @@
+{
+    "cameras": [
+        {
+            "name": "camera1",
+            "fov": 30,
+            "position": { "x": 0, "y": -125, "z": 90 },
+            "owner": "player1"
+        }
+    ],
+    "lights": [
+        {
+            "name": "light1",
+            "intensity": 0.3
+        },
+        {
+            "name": "light2",
+            "type": "DirectionalLight",
+            "position": { "x": 0, "y": -125, "z": 75 },
+            "lookAt": { "x": 0, "y": 0, "z": 0 }
+        }
+    ],
+    "objects3D": [
+        {
+            "name": "ball1",
+            "dae": "models/singleplayer/ball.dae"
+        },
+        {
+            "name": "p1leftFlipper",
+            "dae": "models/singleplayer/flipperLeft.dae"
+        },
+        {
+            "name": "p1rightFlipper",
+            "dae": "models/singleplayer/flipperRight.dae"
+        },
+        {
+            "name": "stage1",
+            "dae": "models/singleplayer/stage.dae"
+        }
+    ],
+    "score": {
+        "type": "singleplayer",
+        "background": "",
+        "color": ""
+    }
+}
