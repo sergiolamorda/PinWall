@@ -169,10 +169,18 @@ http.listen(3000, function() {
                         if(err)
                             console.error(error);
                     });
-                    io.to(gameId).emit('gameOver', 'Has perdido, tu puntuacion es ' + res.score);
+                    io.to(gameId).emit(
+                        'gameOver',
+                        'Has perdido, tu puntuacion es ' + res.score
+                    );
                 } else {
                     Object.values(game.players).forEach(player => {
-                        io.sockets.connected[player.id].emit('gameOver', player.id == game.playerLose ? 'Has perdido...' : 'Has ganado!!!');
+                        io.sockets.connected[player.id].emit(
+                            'gameOver',
+                            player.id == game.playerLose
+                                ? 'Has perdido...'
+                                : 'Has ganado!!!'
+                        );
                     });
                 }
                 delete games.playing[gameId];
