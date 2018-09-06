@@ -36,19 +36,19 @@
             "dae": "models/multiplayer/ball.dae"
         },
         {
-            "name": "p1leftFlipper",
+            "name": "p1LeftFlipper",
             "dae": "models/multiplayer/p1LeftFlipper.dae"
         },
         {
-            "name": "p1rightFlipper",
+            "name": "p1RightFlipper",
             "dae": "models/multiplayer/p1rightFlipper.dae"
         },
         {
-            "name": "p2leftFlipper",
+            "name": "p2LeftFlipper",
             "dae": "models/multiplayer/p2LeftFlipper.dae"
         },
         {
-            "name": "p2rightFlipper",
+            "name": "p2RightFlipper",
             "dae": "models/multiplayer/p2RightFlipper.dae"
         },
         {
