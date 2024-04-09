@@ -56,12 +56,12 @@ app.get('/user', passportConfig.isAuthenticated, (req, res) => {
     res.json(req.user);
 });
 
-app.get('/ranking', (req, res) => {
+app.get('/ranking', async (req, res) => {
     var query = Score.find().select('points username type');
-    query.exec((err, score) => {
-        if(err) return handleError(err);
-        res.json(score);
-    });
+
+    const scores = await query.exec()
+
+    res.json(scores);
 });
 
 var games = { waiting: {}, playing: {} };
@@ -152,7 +152,7 @@ function leaveGame(socket) {
 //Server
 http.listen(3000, function() {
     console.log('listening on *:3000');
-    setInterval(() => {
+    setInterval(async () => {
         Object.entries(games.playing).forEach(game => {
             var gameId = game[0],
                 game = game[1];
@@ -165,10 +165,7 @@ http.listen(3000, function() {
                         username: game.players.player1.username,
                         type: game.levelType
                     });
-                    score.save(err => {
-                        if(err)
-                            console.error(error);
-                    });
+                    score.save();
                     io.to(gameId).emit(
                         'gameOver',
                         'Has perdido, tu puntuacion es ' + res.score

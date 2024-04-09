@@ -1,7 +1,7 @@
 var passport = require('passport'),
     User = require('../models/User');
 
-exports.postSignup = (req, res, next) => {
+exports.postSignup = async (req, res, next) => {
     console.log(req.body);
     if(req.body.password1 == req.body.password2) {
         var newUser = new User({
@@ -9,6 +9,20 @@ exports.postSignup = (req, res, next) => {
             password: req.body.password1
         });
 
+        const user = await User.findOne({ username: req.body.username })
+
+        if (user) {
+            return res.render('login', { error: 'El usuario ya existe' });
+        }
+
+        await newUser.save()
+
+        req.logIn(newUser, (err) => {
+            if(err) next(err);
+            res.redirect('/');
+        });
+
+        /*
         User.findOne({username: req.body.username}, (err, exists) => {
             if(exists) return res.render('login', { error: 'El usuario ya existe' });
             newUser.save((err) => {
@@ -19,10 +33,11 @@ exports.postSignup = (req, res, next) => {
                 });
             });
         });
+        */
     }
 }
 
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if(err) next(err);
         if(!user) return res.render('login', { error: 'Usuario o contraseña no válidos' });
